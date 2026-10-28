@@ -80,6 +80,55 @@ SELECT MAX(amount) FROM `payments`;
 SELECT MAX(amount) AS 'MAX Amount' FROM `payments`;
 SELECT customerNumber, SUM(amount) AS 'Total Amount' FROM `payments` WHERE customerNumber = 103;
 
+UPDATE employees SET firstName = 'Nasir', lastName = 'Uddin' WHERE employeeNumber = '1102'
+
+UPDATE employees SET officeCode = 8 WHERE officeCode = 2
+
+DELETE FROM employees WHERE employeeNumber = 1088
+
+
+SELECT customerName, addressLine1, addressLine2 FROM customers WHERE addressLine2 IS NULL
+
+SELECT contactLastName FROM customers WHERE contactLastName LIKE 'Fe%'
+
+SELECT customers.customerNumber, customerName, country, amount FROM customers, payments WHERE payments.customerNumber = customers.customerNumber
+
+
+SELECT customers.customerNumber, customerName, country, amount FROM customers INNER JOIN
+payments ON payments.customerNumber = customers.customerNumber
+
+SELECT customers.customerNumber, customerName, country, amount FROM customers LEFT JOIN
+payments ON payments.customerNumber = customers.customerNumber
+
+SELECT city, country, COUNT(customerNumber)  FROM customers GROUP BY city, country
+
+SELECT customers.customerNumber, customerName, country, SUM(amount) AS 'Total Payments' FROM customers, payments WHERE  customers.customerNumber = payments.customerNumber GROUP BY customers.customerNumber
+
+
+mysql> create user 'rokon'@'localhost' identified by 'abcde';
+mysql> create user 'rifat'@'localhost' identified by 'abcde';
+
+mysql> grant select, insert on pwad73_sampledb.* to 'rifat'@'localhost'
+
+mysql> revoke select on pwad73_sampledb.* FROM 'rifat'@'localhost';
+
+mysql -h localhost -u root -p
+
+show grants for 'rifat'@'localhost';
+
+
+
+#####################
+########VIEWS########
+#####################
+
+
+CREATE VIEW customers_payement_view AS 
+SELECT customers.customerNumber, customerName, phone, addressLine1, city,  state, postalCode, country, paymentDate, amount FROM customers, payments WHERE customers.customerNumber = payments.customerNumber 	 	
+
+
+
+
 
 
 

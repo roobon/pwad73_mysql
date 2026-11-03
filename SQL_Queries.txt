@@ -1,0 +1,31 @@
+
+###########
+Procedure
+###########
+CREATE PROCEDURE `manufacturer_insert_procedure`(IN `m_name` VARCHAR(50) CHARSET utf8mb4, IN `m_address` VARCHAR(100) CHARSET utf8mb4, IN `m_contact` VARCHAR(50) CHARSET utf8mb4) NOT DETERMINISTIC CONTAINS SQL SQL SECURITY DEFINER 
+
+INSERT INTO manufacturer (id, name, address, contact_no ) VALUES (NULL, m_name, m_address, m_contact)
+
+###########
+Trigger
+###########
+
+CREATE TRIGGER `Manuf_and_product_del` AFTER DELETE ON `manufacturer` FOR EACH ROW DELETE FROM product WHERE product.manufacturer_id = OLD.id
+
+###########
+View
+###########
+
+CREATE VIEW above_50000_products AS
+SELECT * FROM `product` WHERE price > 50000
+
+
+
+
+
+
+
+
+
+
+
